@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           TeenyTumblr Tweaker
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        1.5.0
+@version        1.5.1
 @description    Making tumblr just a tad nicer. Not by much though
 @author         Zana
 @preprocessor	stylus
@@ -23,8 +23,6 @@
 		Lks = #ff4930!important;
 		Rps = #00b8ff!important;
 		Otr = #7c5cff!important;
-
-	/* Fuck that dead clown - Tumblr tweaker */
 
 /* 1.5.0 patchnotes: Hello! You may be surprised to find that this style has updated. After the whole One Piece Clown fiasco, I kept this style around to tweak small things I didn't like about Tumblr's layout. Very small things. Figured it could be of use to someone else, so here it is! Not super clean, since it was all originally meant just for me, but whatever */
 
@@ -248,8 +246,16 @@ if(oldNotes=="1") {
 	/*=========oldNotes end=========*/
 
 	
-/*=========END=========*/
-/*=========END=========*/
-/*=========END=========*/
 }
+
+@-moz-document url-prefix("https://www.tumblr.com/tagged/") {
+	/*Displays the "Latest/Top" bar on searches if the "For you" bar is hidden in the dashboard*/
+.Dk06o.X4W3M {
+	display: flex!important;
+	}
+}
+
+/*=========END=========*/
+/*=========END=========*/
+/*=========END=========*/
 
