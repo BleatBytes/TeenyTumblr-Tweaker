@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           TeenyTumblr Tweaker
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        1.5.1
+@version        1.5.2
 @description    Making tumblr just a tad nicer. Not by much though
 @author         Zana
 @preprocessor	stylus
@@ -13,6 +13,7 @@
 @var select		upTab		"Display the upper bar" ["Yes", "No"]
 @var checkbox	oldNotes	"Make the notes counter look like the old one again" 1
 @var color		chatColor	"Chat blog name color" #000
+@var checkbox	noButtons	"Hide the 'follow post' and display options ('oldest first', 'comments and reblogs'...) from the notes" 0
 
 ==/UserStyle== */
 
@@ -201,6 +202,10 @@ if(oldNotes=="1") {
 		visibility: hidden!important;
 		}
 	/* Changes new note details */
+	.blSOv > .poThh {
+		padding: 6px var(--post-padding);
+		}
+
 		/*Replies*/
 	.ykm3O.lRHNZ.F_5SW > span[title="Number of replies"] {
 		color: Rps;
@@ -215,6 +220,7 @@ if(oldNotes=="1") {
 		/*Reblogs*/
 	.ykm3O._vT58.F_5SW > span[title="Number of reblogs"] {
 		color: RBs;
+		transition:0.050s ease-in-out!important;
 		}
 	.ykm3O._vT58.F_5SW[title="Reblogs"] {
 		background: transparent;
@@ -226,6 +232,7 @@ if(oldNotes=="1") {
 		/*Likes*/
 	.ykm3O.ztxCq.F_5SW > span[title="Number of likes"] {
 		color: Lks;
+		transition:0.050s ease-in-out!important;
 		}
 	.ykm3O.ztxCq.F_5SW[title="Likes"] {
 		background:transparent;
@@ -237,6 +244,7 @@ if(oldNotes=="1") {
 		/*Reblog Graph*/
 	.ykm3O.jTUmS.F_5SW[title="Reblog Graph"] {
 		background:transparent;
+		transition:0.050s ease-in-out!important;
 		}
 	.ykm3O.jTUmS.F_5SW[title="Reblog Graph"] > svg use {
 		--icon-color-primary: Otr;
@@ -244,6 +252,14 @@ if(oldNotes=="1") {
 	
 	}
 	/*=========oldNotes end=========*/
+
+/*=========noButtons start=========*/
+if(noButtons=="1") {
+	.TRX6J[aria-label="Oldest first"], .TRX6J[aria-label="Newest first"], .TRX6J[aria-label="Comments and tags"], .TRX6J[aria-label="Tags only"], .TRX6J[aria-label="Other reblogs"], .gAoFY[aria-label="Follow post"] {
+		display: No;
+		}
+	}
+	/*=========noButtons end=========*/
 
 	
 }
