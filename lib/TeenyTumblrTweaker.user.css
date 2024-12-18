@@ -1,29 +1,31 @@
 /* ==UserStyle==
 @name           TeenyTumblr Tweaker
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        1.5.2
+@version        1.5.5
 @description    Making tumblr just a tad nicer. Not by much though
 @author         Zana
 @preprocessor	stylus
-@updateURL	https://raw.githubusercontent.com/JustDownloadin/TeenyTumblr-Tweaker/main/lib/TeenyTumblrTweaker.user.css
+@updateURL		https://raw.githubusercontent.com/JustDownloadin/TeenyTumblr-Tweaker/main/lib/TeenyTumblrTweaker.user.css
 
 
 @var color		ahrefColor	"External link color" #00b8ff
 @var select		ahrefItalic "External link style" ["normal*", "italic", "bold"]
 @var select		upTab		"Display the upper bar" ["Yes", "No"]
 @var checkbox	oldNotes	"Make the notes counter look like the old one again" 1
+@var checkbox	showComm	"Display the 'Communities' button on the sidebar" 0
 @var color		chatColor	"Chat blog name color" #000
-@var checkbox	noButtons	"Hide the 'follow post' and display options ('oldest first', 'comments and reblogs'...) from the notes" 0
+@var checkbox	noButtons	"Hide the 'follow post' and display options ('oldest first', 'comments and reblogs'...) from the notes. Not recommended." 0
+@var color		RBs			"Reblog button color" #0ab335
+@var color		Lks			"Likes button color" #ff4930
+@var color		Rps			"Replies button color" #00b8ff
+@var color		Otr			"''Other'' color (like for the Reblog Graph)" #7c5cff
 
 ==/UserStyle== */
 
 @-moz-document url-prefix("https://www.tumblr.com/") {
 
-		No = none!important;
-		RBs = #0ab335!important;
-		Lks = #ff4930!important;
-		Rps = #00b8ff!important;
-		Otr = #7c5cff!important;
+	i = !important;
+	No = none i;
 
 /* 1.5.0 patchnotes: Hello! You may be surprised to find that this style has updated. After the whole One Piece Clown fiasco, I kept this style around to tweak small things I didn't like about Tumblr's layout. Very small things. Figured it could be of use to someone else, so here it is! Not super clean, since it was all originally meant just for me, but whatever */
 
@@ -33,12 +35,18 @@
 /* Hides recommended blogs, tumblr radar, the adblock message, that stuff. The explore button stays because i think it's cute :3 */
 .FZkjV, .HOjIH,
 .I6Lwl,
-.IYrO9.g8SYn[title="Get a domain"],
-.IYrO9.g8SYn[title="TumblrMart"],
-.TRX6J[aria-label="Tip"]{
-	display:No;
+.IYrO9[title="Get a domain"],
+.IYrO9[title="TumblrMart"],
+.IYrO9[title="Communities"],
+.TRX6J[aria-label="Tip"],
+.TRX6J[aria-label="Go Premium"]{
+	display: none i;
 	}
-	
+if (showComm == 1) {
+	.IYrO9[title="Communities"] {
+		display: flex;
+	}
+}
 /*Hides the Following/For you/Your tags bar*/
 .Dk06o.X4W3M {
 	display: upTab;
@@ -47,20 +55,20 @@
 /* Changes external link look */
 /*body.accesskit-blue-links article a[target="_blank"][href^="https://t.umblr.com/redirect"], body.accesskit-blue-links article a[target="_blank"][href^="https://href.li/"]*/
 article :is(.k31gt) a[target="_blank"] {
-	color: ahrefColor!important;
-	font-style: ahrefItalic unless (ahrefItalic=="bold")!important;
-	font-weight: ahrefItalic if (ahrefItalic=="bold")!important;
+	color: ahrefColor i;
+	font-style: ahrefItalic unless (ahrefItalic=="bold") i;
+	font-weight: ahrefItalic if (ahrefItalic=="bold") i;
 	}
 	
 /* Changes name and button colour of blog in chat */
 div.ySwFJ > a.BSUG4 {
-	color: chatColor!important;
+	color: chatColor i;
 	}
 .znXuz .mEtpN > button > span.EvhBA > svg {
-	--icon-color-primary: chatColor!important
+	--icon-color-primary: chatColor i
 	}
 .j17Mp.Nz43S {
-	border-radius: 0!important;
+	border-radius: 0 i;
 	}
 .nZ9l5._QSie {
 	background-color: transparent;	
@@ -71,84 +79,85 @@ div.ySwFJ > a.BSUG4 {
 li.IYrO9.ywBwc > a[href="/settings/domains"],
 li.IYrO9.ywBwc > a[href="/settings/purchases"],
 li.IYrO9.ywBwc > a[href="/settings/gifts"] {
-	display: No;
+	display: none i;
 	}	
 
 /*Post border radius*/
 .FtjPK {
-	border-radius: 0 25px 8px 0!important;
+	border-radius: 0 25px 8px 0 i;
 	}
 	
 /* Tweaks the activity button's menues*/
 .lUKCu .SAqxs .BG5X8[aria-selected="true"] {
-	background-color:#fff!important;
-	border-style: none!important;
+	background-color:#fff i;
+	border-style: none i;
 	}
 	
 .lUKCu .SAqxs .BG5X8 {
-	border-radius: 1px!important;
-	border-style: none none solid!important;
-	transition:0.050s ease-in-out!important;
+	border-radius: 1px i;
+	border-style: none none solid i;
+	transition:0.050s ease-in-out i;
 	}
 		
 	/*Activity button*/
 	.lUKCu .SAqxs .BG5X8:nth-child(1) {
-		border-color: #ff4930ab!important
+		border-color: #ff4930ab i;
 		}
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(1) {
-		color: Lks;
+		color: Lks i;
 		}
 	.lUKCu .SAqxs .BG5X8:nth-child(1):hover,
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(1):hover {
-		background-color: #ff49301c!important
+		background-color: #ff49301c i;
 		}
 	
 	/*Mention button*/
 	.lUKCu .SAqxs .BG5X8:nth-child(2) {
-		border-color: #7c5cffab!important
+		border-color: #7c5cffab i;
 		}
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(2) {
-		color: Otr;
+		color: Otr i;
 		}
 	.lUKCu .SAqxs .BG5X8:nth-child(2):hover,
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(2):hover {
-		background-color: #7c5cff1c!important
+		background-color: #7c5cff1c i;
 		}
 
 	/*Reblogs button*/
 	.lUKCu .SAqxs .BG5X8:nth-child(3) {
-		border-color: #0ab335ab!important
+		border-color: #0ab335ab i;
 		}
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(3) {
-		color: RBs;
+		color: RBs i;
 		}
 	.lUKCu .SAqxs .BG5X8:nth-child(3):hover,
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(3):hover {
-		background-color: #0ab3351c!important
+		background-color: #0ab3351c i;
 		}
 
 	/*Replies button*/
 	.lUKCu .SAqxs .BG5X8:nth-child(4) {
-		border-color: #00b8ffab!important
+		border-color: #00b8ffab i;
 		}
-	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(4) {
-		color: Rps;
+	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(4){
+		color: Rps i;
 		}
+		
 	.lUKCu .SAqxs .BG5X8:nth-child(4):hover,
 	.lUKCu .SAqxs .BG5X8[aria-selected="true"]:nth-child(4):hover {
-		background-color: #00b8ff1c!important
+		background-color: #00b8ff1c i;
 		}
 		
 /*		
 Changes activity feed's notifications
 .TZgeO[aria-label="Notification"]:hover {
-	background-color: #eeeeee78!important;
+	background-color: #eeeeee78 i;
 	}	
 .TZgeO.Q9pIH[aria-label="Unread Notification"] {
-	background-color: #75c3e21c!important;
+	background-color: #75c3e21c i;
 	}
 .TZgeO.Q9pIH[aria-label="Unread Notification"]:hover {
-	background-color: #00b8ff1c!important;
+	background-color: #00b8ff1c i;
 	}
 */	
 
@@ -156,18 +165,21 @@ Changes activity feed's notifications
 .sHSSD .aLlJL,
 .s7YOu .fdQ5Z,
 .sHSSD .aLlJL > button > span.EvhBA > svg {
-	border-radius: 5px!important;
-	color: #018ec5!important;
-	background-color: #00b8ff24!important;
-	--icon-color-primary: #018ec5!important;
+	border-radius: 5px i;
+	color: #018ec5 i;
+	background-color: #00b8ff24 i;
+	--icon-color-primary: #018ec5 i;
 	}
 .s7YOu .fdQ5Z {
-	border-radius: 25px!important;
+	border-radius: 25px i;
 	}
 .s7YOu .mbROR {
-	color: #018ec5!important;
+	color: #018ec5 i;
 	}
-
+/*Changes border radius of the search bar*/
+.oPa7v {
+	border-radius: 5px;
+}
 
 	
 	/*=========oldNotes start=========*/
@@ -175,31 +187,31 @@ if(oldNotes=="1") {
 	
 	/* Hides the note count on posts with 0 notes */
 	div.gstmW:has([title="0 notes"]) {
-		visibility: hidden!important;
+		visibility: hidden i;
 		}
 	/* Makes the '# notes' button more like it used to be */
 	div.vE6sH {
-		border: none!important;
-		padding: 6px 6px!important;
+		border: none i;
+		padding: 6px 6px i;
 		}
 	span.xu5ZG, span.lJK40 {
-		font-weight: bold!important;
-		color: #595959!important;
+		font-weight: bold i;
+		color: #595959 i;
 		}
 	div.ePsyd {
-		padding: 0!important;
-		background-color: transparent!important;
+		padding: 0 i;
+		background-color: transparent i
 		}
 		
 	/* Makes the other buttons in the lower bar of dashboard posts the same colour as the notes, because I noticed they were different and it was driving me crazy */
 	span.EvhBA > svg,
 	a[aria-label="Reblog"] > svg {
-		--icon-color-primary: #595959!important
+		--icon-color-primary: #595959 i;
 		}
 		
 	/*Hides Blaze button in post footer (yeah this belongs here, shush*/
 	.tOKgq .MCavR.r3vIz {
-		visibility: hidden!important;
+		visibility: hidden i;
 		}
 	/* Changes new note details */
 	.blSOv > .poThh {
@@ -210,17 +222,17 @@ if(oldNotes=="1") {
 	.ykm3O.lRHNZ.F_5SW > span[title="Number of replies"] {
 		color: Rps;
 		}
-	.ykm3O.lRHNZ.F_5SW[title="Replies"] {
-		background: transparent!important;
+	.ykm3O.lRHNZ.F_5SW[title="Replies"]	{
+		background: transparent i;
 		}
 	.ykm3O.lRHNZ.F_5SW[title="Replies"] > svg use {
-		--icon-color-primary: Rps;
+		--icon-color-primary: Rps i;
 		}
 		
 		/*Reblogs*/
 	.ykm3O._vT58.F_5SW > span[title="Number of reblogs"] {
 		color: RBs;
-		transition:0.050s ease-in-out!important;
+		transition:0.050s ease-in-out i;
 		}
 	.ykm3O._vT58.F_5SW[title="Reblogs"] {
 		background: transparent;
@@ -232,7 +244,7 @@ if(oldNotes=="1") {
 		/*Likes*/
 	.ykm3O.ztxCq.F_5SW > span[title="Number of likes"] {
 		color: Lks;
-		transition:0.050s ease-in-out!important;
+		transition:0.050s ease-in-out i;
 		}
 	.ykm3O.ztxCq.F_5SW[title="Likes"] {
 		background:transparent;
@@ -244,19 +256,26 @@ if(oldNotes=="1") {
 		/*Reblog Graph*/
 	.ykm3O.jTUmS.F_5SW[title="Reblog Graph"] {
 		background:transparent;
-		transition:0.050s ease-in-out!important;
+		transition:0.050s ease-in-out i;
 		}
 	.ykm3O.jTUmS.F_5SW[title="Reblog Graph"] > svg use {
 		--icon-color-primary: Otr;
 		}
 	
 	}
+	/*Replies*/
+	.As9E4, .TRX6J.NcZPX[aria-label="reply count button"] {
+		background-color: #f2f2f2;
+	}
+	.As9E4 {
+		padding: 8px 12px;
+	}
 	/*=========oldNotes end=========*/
 
 /*=========noButtons start=========*/
 if(noButtons=="1") {
 	.TRX6J[aria-label="Oldest first"], .TRX6J[aria-label="Newest first"], .TRX6J[aria-label="Comments and tags"], .TRX6J[aria-label="Tags only"], .TRX6J[aria-label="Other reblogs"], .gAoFY[aria-label="Follow post"] {
-		display: No;
+		display: none  i;
 		}
 	}
 	/*=========noButtons end=========*/
@@ -267,7 +286,7 @@ if(noButtons=="1") {
 @-moz-document url-prefix("https://www.tumblr.com/tagged/") {
 	/*Displays the "Latest/Top" bar on searches if the "For you" bar is hidden in the dashboard*/
 .Dk06o.X4W3M {
-	display: flex!important;
+	display: flex i;
 	}
 }
 
