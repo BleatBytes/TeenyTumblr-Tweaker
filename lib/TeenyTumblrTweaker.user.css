@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           TeenyTumblr Tweaker
 @namespace      https://userstyles.world/user/JustDownloadin
-@version        1.6.0
+@version        1.6.1
 @description    Making tumblr just a tad nicer.
 @author         Zana
 @preprocessor	stylus
@@ -14,7 +14,7 @@
 @var checkbox	oldNotes	"Make the notes counter look like the old one again" 1
 @var checkbox	showComm	"Display the 'Communities' button on the sidebar" 0
 @var checkbox	noButtons	"Hide the 'follow post' and display options ('oldest first', 'comments and reblogs'...) from the notes." 0
-@var checkbox	unfuckComp	"Dashboard Unfucker compatibility mode" 0
+@var checkbox	unfuckComp	"Dashboard Plus compatibility mode" 0
 @var color		chatColor	"Chat blog name color" #000
 @var color		rebCol			"Reblog button color" #0ab335
 @var color		likeCol			"Likes button color" #ff4930
@@ -27,6 +27,10 @@
 @-moz-document url-prefix("https://www.tumblr.com/") {
 
 /*
+1.6.1 patch notes:
+- Lol immediately had to fix a typo
+- Took the time to fix a couple other things with oldNotes + dashboard plus compatibility
+- Wondering if oldotes should really be a toggle or not. Maybe it shouldn't be, and just work as the default?
 1.6.0 patch notes:
 - Updated old selectors
 - Added compatibility with Dashboard Plus' post footer fix
@@ -118,7 +122,7 @@ li.IYrO9.ywBwc > a[href="/settings/gifts"] {
 		
 /*All activity button*/
 .y7LSP.dJyeE.NJkFM:nth-child(1) {
-	border-color: likeLight i;
+	border-color: likeMed i;
 	}
 .y7LSP.dJyeE.NJkFM[aria-selected="true"]:nth-child(1) {
 	color: likeCol i;
@@ -288,65 +292,74 @@ if(oldNotes=="1") {
 		--icon-color-primary: miscCol;
 		}
 
-	/*Replies*/
-		.MI6Q7[aria-label="Reply"] {
-			margin-left:-3px;
-		}
-		.As9E4, .TRX6J.NcZPX[aria-label="reply count button"] {
-			background-color: #f2f2f2;
-		}
-		.As9E4 {
-			padding: 12px 15px;
-		}
-		.zn53i.EF4A5.r21y5 {
-			background-color:transparent;
-			color: replCol;
-		}
-		.zn53i.EF4A5.r21y5:hover {
-			background-color:transparent;
-			opacity: 0.5;
-		}
-		._7Vla9 {
-			padding-top:8px!important;
-			padding-bottom:8px!important;
-		}
-		.NmEJh.pPM64 {
-			border-radius: 5px!important;
-			--border-radius: 5px;
-		}
+	/*Replies proper*/
+	.MI6Q7[aria-label="Reply"] {
+		margin-left:-3px;
+	}
+	.As9E4, .TRX6J.NcZPX[aria-label="reply count button"] {
+		background-color: #f2f2f2;
+	}
+	.As9E4 {
+		padding: 12px 15px;
+	}
+	.zn53i.EF4A5.r21y5 {
+		background-color:transparent;
+		color: replCol;
+	}
+	.zn53i.EF4A5.r21y5:hover {
+		background-color:transparent;
+		opacity: 0.5;
+	}
+	._7Vla9 {
+		padding-top:8px!important;
+		padding-bottom:8px!important;
+	}
+	.NmEJh.pPM64 {
+		border-radius: 5px!important;
+		--border-radius: 5px;
+	}
 	/*More dashboard plus compatibility*/
-		if(unfuckComp=="1"){
-			.AZJHD[data-css="scrollableContent"]{
-				button[aria-selected="true"]{
-					background-color: transparent i;
-					color: #595959;
-					border-radius: 0px i;
-					transition:0.050s ease-in-out i;
-				}
-				#comments {
-					border-color: replCol i;
-				}
-				#comments:hover {
-					background-color: repLight i;
-				}
-				#reblogs {
-					border-color: rebCol i;
-				}
-				#reblogs:hover {
-					background-color: rebLight i;
-				}
-				#likes {
-					border-color: likeCol i;
-				}
-				#likes:hover {
-					background-color: likeLight i;
-				}
+	if(unfuckComp=="1"){
+		.AZJHD[data-css="scrollableContent"]{
+			button[aria-selected="true"]{
+				background-color: transparent i;
+				color: #595959;
+				border-radius: 0px i;
+				transition:0.050s ease-in-out i;
 			}
-			.bf-notesIcon {
-				padding: 5px 2px i;
+			#comments {
+				border-color: replCol i;
 			}
+			#comments:hover {
+				background-color: repLight i;
+			}
+			#comments[data-active-item="true"] .Ncp30 {
+				color: replCol;
+			}
+			#reblogs {
+				border-color: rebCol i;
+			}
+			#reblogs:hover {
+				background-color: rebLight i;
+			}
+			#reblogs[data-active-item="true"] .Ncp30 {
+				color: rebCol;
+			}
+			#likes {
+				border-color: likeCol i;
+			}
+			#likes:hover {
+				background-color: likeLight i;
+			}
+			#likes[data-active-item="true"] .Ncp30 {
+				color: likeCol;
+			}
+		}
+		.bf-notesIcon {
+			padding: 5px 2px i;
 		}
 	}
+}
 	
 /*=========oldNotes end=========*/
 
@@ -354,7 +367,7 @@ if(oldNotes=="1") {
 /*It's actually unclear to me whether this is now obsolete or not due to the footer changes. We'll see.*/
 if(noButtons=="1") {
 	.TRX6J[aria-label="Oldest first"], .TRX6J[aria-label="Newest first"], .TRX6J[aria-label="Comments and tags"], .TRX6J[aria-label="Tags only"], .TRX6J[aria-label="Other reblogs"], .gAoFY[aria-label="Follow post"] {
-		display: none  i;
+		display: none i;
 		}
 }
 /*=========noButtons end=========*/
